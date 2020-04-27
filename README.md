@@ -3,6 +3,8 @@
 Cloud ready cron scheduler service. Mr. Cron will scrape multiple urls for cronjob data and
 execute (call desired urls). No additional services are needed.
 
+![MrCron Command flow](docs/mrcron-1.png)
+
 ## Installation / Running MrCron
 
 Just run the publicly available on dockerhub:
@@ -24,7 +26,7 @@ docker run -e "CONF_SCRAPE_URLS=http://xy/mrcron.json" infracamp/mrcron
 The urls to scrape for jobdef.json content. Multiple URLs can be specified
 separated by semicolon.
 
-### MrCron jobdef.yaml
+### MrCron jobdef.json
 
 ```json
 {
