@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  redis:
+    image: redis
+    networks:
+      - mrcron
+
+networks:
+  mrcron:
+    external: true
+
+

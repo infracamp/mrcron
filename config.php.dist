@@ -1,0 +1,21 @@
+<?php
+/**
+ * This file is copied to config.php by kick
+ *
+ * Placeholders (\%CONF_ENVNAME\%) are being replaced by the values found in environment.
+ * See .kick.yml config_file section.
+ *
+ * Original file by kickstart-skel/php-app-base
+ */
+
+
+define("SERVICE_ID", "%SERVICE_ID?mrcron%");
+define("DEV_MODE", (bool)"%DEV_MODE%");
+define("VERSION_INFO", "v0.1.%VERSION_NUMBER% (%VERSION_DATE_COMPACT%)");
+
+// The urls to scrape for mrcron.json or mrcron.yaml
+define("CONF_SCRAPE_URLS", "%CONF_SCRAPE_URLS?http://localhost/mock/mrcron.json%");
+
+define("CONF_SYSLOG_HOST", "%SYSLOG_HOST?%");
+
+

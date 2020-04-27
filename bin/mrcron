@@ -1,0 +1,17 @@
+#!/usr/bin/php
+<?php
+/**
+ * MrCron Executable
+ *
+ * Run the scheduler
+ *
+ */
+namespace App;
+
+use MrCron\MrCronCli;
+
+require __DIR__ . "/../vendor/autoload.php";
+
+
+$cli = new MrCronCli();
+$cli->main($argv, $argc);

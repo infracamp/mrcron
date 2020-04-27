@@ -1,0 +1,36 @@
+{
+  "name": "infracamp/mrcron",
+  "description": "MrCron Cloud CronJob Service",
+  "keywords": ["Keyword1", "Keyword2"],
+  "license": "MIT",
+  "authors": [
+    { "name": "Matthias Leuffen", "email": "m@tth.es" }
+  ],
+  "repositories": [
+  ],
+  "require": {
+    "php": ">=7.2",
+    "ext-json": "*",
+    "ext-http": "*",
+    "phore/micro-app": "dev-master",
+    "phore/http-client": "dev-master",
+    "phore/core": "dev-master",
+    "ext-yaml": "*",
+    "phore/log": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "MrCron\\": "src/"
+    },
+    "files": [
+      "config.php"
+    ]
+  },
+  "minimum-stability": "dev",
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "config": {
+    "preferred-install": "source"
+  }
+}
