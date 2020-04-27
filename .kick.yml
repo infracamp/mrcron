@@ -15,3 +15,5 @@ command:
   test:
     - "phpunit --testdox"
 
+  run:
+    - "/opt/bin/mrcron"

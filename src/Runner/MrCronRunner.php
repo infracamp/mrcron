@@ -6,6 +6,7 @@ namespace MrCron\Runner;
 
 use Phore\HttpClient\Ex\PhoreHttpRequestException;
 use Phore\HttpClient\PhoreHttpAsyncQueue;
+use Phore\HttpClient\PhoreHttpResponse;
 use PHPUnit\Exception;
 use Psr\Log\LoggerInterface;
 
@@ -56,12 +57,25 @@ class MrCronRunner
     public function runJob(Job $job, PhoreHttpAsyncQueue $queue)
     {
         phore_out("Running job '{$job->id}'");
+        foreach ($job->getRequests() as $request) {
+            $queue->queue($request)->then(
+                function(PhoreHttpResponse $success) {
+                    phore_out("Job success on url '{$success->getRequest()->getUrl()}': " . $success->getBody());
+                    $this->log->notice("Job success on url '{$success->getRequest()->getUrl()}': " . $success->getBody());
+                },
+                function (PhoreHttpRequestException $ex) {
+                    phore_out("Job failed on url: " . $ex->getMessage());
+                    $this->log->warning("Job failed on url: " . $ex->getMessage());
+                }
+            );
+        }
     }
 
-    public function run(array $scrapeUrls)
+    public function run(array $scrapeUrls, bool $singleShot=false)
     {
         $lastMinute = (int)gmdate("i");
         while (true) {
+            phore_out("Waiting for next minute...");
             while ($lastMinute === (int)gmdate("i")) {
                 sleep (1);
             }
@@ -81,6 +95,7 @@ class MrCronRunner
                 throw new \Exception("Cannot fork!");
             } else if ($pid) {
                 // Master process
+
             } else {
                 // Child Process
                 $queue = new PhoreHttpAsyncQueue();
@@ -91,6 +106,13 @@ class MrCronRunner
                 $queue->wait();
                 exit (0);
             }
+            if ($singleShot) {
+                // For development: Single shot mode (By adding -s to command line)
+                sleep(1);
+                phore_out("Single shot mode: Exiting after one loop.");
+                break;
+            }
+
 
         }
 

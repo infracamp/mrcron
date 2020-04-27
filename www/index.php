@@ -7,6 +7,7 @@ use Phore\Log\Logger\PhoreSyslogLoggerDriver;
 use Phore\Log\PhoreLogger;
 use Phore\MicroApp\App;
 use Phore\MicroApp\Handler\JsonExceptionHandler;
+use Psr\Log\LogLevel;
 use Psr\Log\NullLogger;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -14,6 +15,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $app = new App();
 $app->activateExceptionErrorHandlers();
 $app->setOnExceptionHandler($exh = new JsonExceptionHandler());
+$app->acl->addRule(aclRule("*")->ALLOW());
 $logger = new NullLogger();
 if (CONF_SYSLOG_HOST !== null) {
     $exh->setLogger($logger = new PhoreLogger(new PhoreSyslogLoggerDriver(CONF_SYSLOG_HOST, LogLevel::NOTICE)));

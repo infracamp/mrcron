@@ -5,6 +5,7 @@ namespace MrCron\Runner;
 
 
 use Phore\Core\Exception\InvalidDataException;
+use Phore\HttpClient\PhoreHttpRequest;
 
 class Job
 {
@@ -73,6 +74,20 @@ class Job
             && in_array((int)gmdate("n", $curTs), $this->cronTimes["month"])
             && in_array((int)gmdate("w", $curTs), $this->cronTimes["day_of_week"])
         );
+    }
+
+
+    /**
+     * Return array of jobs to run
+     *
+     * @return PhoreHttpRequest[]
+     */
+    public function getRequests() : array
+    {
+        $ret = [];
+        foreach ($this->urls as $url)
+            $ret[] = phore_http_request($url)->withTimeout(5, 30);
+        return $ret;
     }
 
 
