@@ -1,4 +1,4 @@
-# Mr. Cron Cloud Cron Scheduler
+# Mr. Cron: Cloud Cron Scheduler
 
 Cloud ready cron scheduler service. Mr. Cron will scrape multiple urls for cronjob data and
 execute (call desired urls). No additional services are needed.
