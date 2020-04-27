@@ -28,7 +28,8 @@
   },
   "minimum-stability": "dev",
   "require-dev": {
-    "phpunit/phpunit": "*"
+    "phpunit/phpunit": "*",
+    "phore/system": "dev-master"
   },
   "config": {
     "preferred-install": "source"

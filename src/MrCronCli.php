@@ -40,13 +40,18 @@ EOT;
             $logger = new PhoreLogger(new PhoreSyslogLoggerDriver(CONF_SYSLOG_HOST, LogLevel::NOTICE));
         }
         $runner = new MrCronRunner($logger);
-        $runner->run(explode(";", CONF_SCRAPE_URLS), $opts->has("s"));
+
+        $scrapeUrls = CONF_SCRAPE_URLS;
+        if ($opts->has("s")) {
+            $scrapeUrls = $opts->get("s");
+        }
+        $runner->run(explode(";", $scrapeUrls), $opts->has("s"));
     }
 
 
     public function main(array $argv, int $argc)
     {
-        $opts = phore_getopt("hs");
+        $opts = phore_getopt("hs:");
         if ($opts->has("h")) {
             $this->_printHelp();
             exit(1);
