@@ -5,17 +5,27 @@ execute (call desired urls). No additional services are needed.
 
 ![MrCron Command flow](docs/mrcron-1.png)
 
+Features:
+- No database / persistence needed
+- No complex configuration
+- Handles up to 500 Cron Requests in parallel
+- Services define their own jobs (secret job-tokens can be applied)
+- UDP Syslog aware logging interface
+- Compatible to wildly used [crontab](https://en.wikipedia.org/wiki/Cron) format 
+
 ## Installation / Running MrCron
 
-Just run the publicly available on dockerhub:
+Just run the publicly available docker image from [DockerHub](https://hub.docker.com/r/infracamp/mrcron):
 
 ```
 docker run -e "CONF_SCRAPE_URLS=http://xy/mrcron.json" infracamp/mrcron
 ```
 
-- [How to run MrCron on docker stack](docs/docker-stack-mrcron.yml)
+- **[How to run MrCron on docker-swarm](docs/docker-stack-mrcron.yml)**: Compose file
+  to deploy MrCron directly to docker-swarm stack.
 - How to run MrCron on kubernetes
-
+- **[Demo mrcron-jobs.json](docs/demo-mrcron-jobs.json)**: This file can
+  be added to every service that has cronjobs to run
 
 ## Configuration
 

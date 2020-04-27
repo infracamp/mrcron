@@ -1,0 +1,18 @@
+{
+  "jobs": [
+    {
+      "id": "Check every minute for outgoing mail",
+      "cron": "* * * * *",
+      "urls": [
+        "http://infracamp.org/api/sendmail"
+      ]
+    },
+    {
+      "id": "Send abo notifications at 8:30 GMT every first day of the month",
+      "cron": "30 8 1 * *",
+      "urls": [
+        "http://infracamp.org/api/abo-notify"
+      ]
+    }
+  ]
+}
