@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  mrcron:
+    image: infracamp/mrcron
+    environment:
+      - "CONF_SCRAPE_URLS=http://url/to/mrcron.json;http://another/service/mrcron.json"
+      - "CONF_SYSLOG_HOST="
+    networks:
+      ..network config..
+
